@@ -1,0 +1,23 @@
+[
+    {
+    "ApiPath": "/v1/info/version",
+    "Method": "GET"
+    },
+    {
+        "ApiPath": "/v1/info/time",
+        "Method": "GET"
+    },
+    {
+        "ApiPath": "/v1/order/insert",
+        "Method": "POST",
+        "Body": {
+            "instrumentID":        "ETH-BTC",
+            "orderPriceType":      "limit",
+            "direction":           "sell",
+            "limitPrice":          "0.10",
+            "volumeTotalOriginal": "1",
+            "timeCondition":       "GTC",
+            "orderLocalID":        "test"
+        }
+    }
+]
