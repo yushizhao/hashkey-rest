@@ -12,10 +12,11 @@ type Config struct {
 	Host       string
 	Symbol     string
 	TimeOffset int64
+	Debug      bool
 }
 
 var (
-	config       Config
+	Conf         Config
 	authType     string
 	baseURL      string
 	orderLocalID []string
@@ -30,13 +31,13 @@ func Init(configPath *string) error {
 	defer jsonFile.Close()
 
 	byteValue, _ := ioutil.ReadAll(jsonFile)
-	err = json.Unmarshal(byteValue, &config)
+	err = json.Unmarshal(byteValue, &Conf)
 	if err != nil {
 		return err
 	}
 
 	authType = "HMAC"
-	baseURL = config.Host + "/APITrade"
+	baseURL = Conf.Host + "/APITrade"
 
 	return nil
 }

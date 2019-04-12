@@ -3,5 +3,6 @@
     "ApiKeyHMAC":"MTU0NDUwODQ0NjI0NTAwMDAwMDAwNTQ=",
     "SecretKey":"vprggEasLOksdmut6WcFvuv4oUuAbewdkGJY1fgAvBw=",
     "Symbol":"ETH-BTC",
-    "TimeOffset":0
+    "TimeOffset":0,
+    "Debug":true
 }

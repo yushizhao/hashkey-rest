@@ -37,8 +37,14 @@ func main() {
 	json.Unmarshal(byteValue, &rawFile)
 	objList := rawFile.([]interface{})
 
+	var debugInput string
 	for i, element := range objList {
 		log.Println(i)
+
+		if util.Conf.Debug {
+			fmt.Scanln(&debugInput)
+		}
+
 		var test util.ApiTest
 		bytes, err := json.Marshal(element)
 		if err != nil {
@@ -57,6 +63,10 @@ func main() {
 		}
 	}
 
+	log.Println("Cancel All")
+	if util.Conf.Debug {
+		fmt.Scanln(&debugInput)
+	}
 	util.CancelAll()
 
 }

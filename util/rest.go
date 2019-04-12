@@ -27,7 +27,7 @@ func (test ApiTest) PreSend() error {
 	switch test.ApiPath {
 	case "/v1/order/insert":
 		if _, found := test.Body["instrumentID"]; !found {
-			test.Body["instrumentID"] = config.Symbol
+			test.Body["instrumentID"] = Conf.Symbol
 		}
 
 		orderLocalID = append(orderLocalID, test.Body["orderLocalID"].(string))
@@ -46,14 +46,14 @@ func (test ApiTest) Send() (string, error) {
 		body = nil
 	}
 
-	timestamp := strconv.FormatInt(time.Now().Unix()*1000+config.TimeOffset, 10)
+	timestamp := strconv.FormatInt(time.Now().Unix()*1000+Conf.TimeOffset, 10)
 	hashedDataHex := GenerateMessage(timestamp, test.Method, test.ApiPath+string(body))
 
 	log.Println(string(hashedDataHex))
 
 	// hmac
 	// 消息验证码
-	hmacStr := SHA256HMAC(hashedDataHex, config.SecretKey)
+	hmacStr := SHA256HMAC(hashedDataHex, Conf.SecretKey)
 
 	// fmt.Println(hmacStr)
 
@@ -63,7 +63,7 @@ func (test ApiTest) Send() (string, error) {
 	}
 
 	// request header
-	req.Header["API-KEY"] = []string{config.ApiKeyHMAC}
+	req.Header["API-KEY"] = []string{Conf.ApiKeyHMAC}
 	req.Header["API-SIGNATURE"] = []string{hmacStr}
 	req.Header["API-TIMESTAMP"] = []string{timestamp}
 	req.Header["AUTH-TYPE"] = []string{"HMAC"}
