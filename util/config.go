@@ -11,6 +11,7 @@ type Config struct {
 	ApiKeyHMAC string
 	Host       string
 	Symbol     string
+	TimeOffset int64
 }
 
 var (
@@ -34,7 +35,7 @@ func Init(configPath *string) error {
 	}
 
 	authType = "HMAC"
-	baseURL = "https://" + config.Host + "/APITrade"
+	baseURL = config.Host + "/APITrade"
 
 	return nil
 }

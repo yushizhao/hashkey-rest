@@ -1,6 +1,7 @@
 {
-    "Host":"api-preview.pro.hashkey.com",
+    "Host":"https://api-preview.pro.hashkey.com",
     "ApiKeyHMAC":"MTU0NDUwODQ0NjI0NTAwMDAwMDAwNTQ=",
     "SecretKey":"vprggEasLOksdmut6WcFvuv4oUuAbewdkGJY1fgAvBw=",
-    "Symbol":"ETH-BTC"
+    "Symbol":"ETH-BTC",
+    "TimeOffset":0
 }

@@ -31,7 +31,7 @@ func (test ApiTest) Send() (string, error) {
 		body = nil
 	}
 
-	timestamp := strconv.FormatInt(time.Now().Unix()*1000, 10)
+	timestamp := strconv.FormatInt(time.Now().Unix()*1000+config.TimeOffset, 10)
 	hashedDataHex := GenerateMessage(timestamp, test.Method, test.ApiPath+string(body))
 
 	log.Println(string(hashedDataHex))
