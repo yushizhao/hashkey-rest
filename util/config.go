@@ -15,9 +15,10 @@ type Config struct {
 }
 
 var (
-	config   Config
-	authType string
-	baseURL  string
+	config       Config
+	authType     string
+	baseURL      string
+	orderLocalID []string
 )
 
 func Init(configPath *string) error {

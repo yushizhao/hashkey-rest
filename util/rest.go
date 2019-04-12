@@ -29,6 +29,8 @@ func (test ApiTest) PreSend() error {
 		if _, found := test.Body["instrumentID"]; !found {
 			test.Body["instrumentID"] = config.Symbol
 		}
+
+		orderLocalID = append(orderLocalID, test.Body["orderLocalID"].(string))
 	}
 	return nil
 }
