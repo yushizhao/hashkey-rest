@@ -23,7 +23,20 @@ func GenerateMessage(timestamp, method, apiPath string) []byte {
 	return originData
 }
 
+func (test ApiTest) PreSend() error {
+	switch test.ApiPath {
+	case "/v1/order/insert":
+		if _, found := test.Body["instrumentID"]; !found {
+			test.Body["instrumentID"] = config.Symbol
+		}
+	}
+	return nil
+}
+
 func (test ApiTest) Send() (string, error) {
+
+	test.PreSend()
+
 	var body []byte
 	if test.Body != nil {
 		body, _ = json.Marshal(test.Body)

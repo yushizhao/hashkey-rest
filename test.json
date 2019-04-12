@@ -11,7 +11,6 @@
         "ApiPath": "/v1/order/insert",
         "Method": "POST",
         "Body": {
-            "instrumentID":        "ETH-BTC",
             "orderPriceType":      "limit",
             "direction":           "sell",
             "limitPrice":          "0.10",
