@@ -37,16 +37,49 @@ func main() {
 	json.Unmarshal(byteValue, &rawFile)
 	objList := rawFile.([]interface{})
 
-	var debugInput string
-	for i, element := range objList {
+	objListLen := len(objList)
+	for i := 0; i < objListLen; i++ {
 		log.Println(i)
 
 		if util.Conf.Debug {
+			var debugInput string
 			fmt.Scanln(&debugInput)
+			switch debugInput {
+			case "back":
+				if i == 0 {
+					i = -1
+				} else {
+					i = i - 2
+				}
+				continue
+
+			case "skip":
+				continue
+
+			case "end":
+				i = objListLen // -1
+				continue
+
+			case "view":
+				log.Println(objList[i])
+				i = i - 1
+				continue
+
+			case "check":
+				log.Println("orderLocalID:")
+				fmt.Scanln(&debugInput)
+				err := util.CheckOrder(debugInput)
+				if err != nil {
+					log.Println(err)
+				}
+				i = i - 1
+				continue
+			}
+
 		}
 
 		var test util.ApiTest
-		bytes, err := json.Marshal(element)
+		bytes, err := json.Marshal(objList[i])
 		if err != nil {
 			log.Println(err)
 			continue
@@ -65,6 +98,7 @@ func main() {
 
 	log.Println("Cancel All")
 	if util.Conf.Debug {
+		var debugInput string
 		fmt.Scanln(&debugInput)
 	}
 	util.CancelAll()
